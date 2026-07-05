@@ -12,37 +12,37 @@ import { connectDB } from "./lib/db.js";
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Replace this with your Vercel frontend URL after deployment
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://streamify-mdki.onrender.com",
+  "https://streamify-psi-ten.vercel.app",
+  "https://streamify-nsvw2wsjr-sachin-kumars-projects-595804d4.vercel.app",
 ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (Postman, mobile apps, etc.)
+    origin: (origin, callback) => {
+      // Allow requests without an Origin header (Postman, server-to-server, etc.)
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
-      return callback(new Error("Not allowed by CORS"));
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
 app.use(express.json());
 app.use(cookieParser());
 
-// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/chat", chatRoutes);
 
-// Health Check Route
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
