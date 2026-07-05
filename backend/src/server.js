@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5001;
 // Replace this with your Vercel frontend URL after deployment
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://YOUR-FRONTEND.vercel.app",
+  "https://streamify-mdki.onrender.com",
 ];
 
 app.use(
